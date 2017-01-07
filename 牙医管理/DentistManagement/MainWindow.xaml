@@ -1,0 +1,389 @@
+﻿<Window x:Class="DentistManagement.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:my="clr-namespace:WPF.DazzleUI2.Controls;assembly=WPF.DazzleUI2"
+		xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:canvas="clr-namespace:DentistManagement.View"
+        mc:Ignorable="d"
+        Title="牙医管家" Height="768" Width="1024"
+        Icon="/DentistManagement;component/Image/dentist.png"
+        WindowStartupLocation="CenterScreen"  WindowState="Maximized"  WindowStyle="None" ResizeMode="NoResize" Topmost="False" AllowsTransparency="False"  BorderThickness="1">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Path Data="M25,48 L494,48" Fill="#FF49C117"  HorizontalAlignment="Left" Height="1" Margin="0" Grid.Row="1" Stretch="Fill" Stroke="#FF49C117"  VerticalAlignment="Top" StrokeThickness="1"/>
+        <TabControl  x:Name="TabControlWndWorkMatters" Style="{DynamicResource SubTabControlStyle}" Background="{x:Null}" TabStripPlacement="Left" Margin="2" Padding="0" HorizontalContentAlignment="Center" Grid.Row="1" >
+            <TabItem x:Name="TabItemPositionReportingRecord" Style="{DynamicResource SubTabItemStyle}" Header="预约" Margin="0" Padding="0">
+            	<Grid>
+            		<Grid.ColumnDefinitions>
+            			<ColumnDefinition Width="350"/>
+            			<ColumnDefinition Width="*"/>
+            		</Grid.ColumnDefinitions>
+            		<Grid Margin="0" Grid.Row="3">
+            			<Grid.RowDefinitions>
+            				<RowDefinition Height="72"/>
+            				<RowDefinition Height="350"/>
+							<RowDefinition Height="60"/>
+            				<RowDefinition Height="*"/>
+            			</Grid.RowDefinitions>
+            			<Grid Margin="0" Grid.Row="1">
+                            <StackPanel Background="#FFF0F0F0" Height="37" Margin="0" Name="stackPanel1" VerticalAlignment="Top" Orientation="Horizontal" Width="350">
+                                <Label Height="28" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="13"></Label>
+                                <Label Height="28" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="13"></Label>
+                                <Label Height="28" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="13"></Label>
+                                <Label Height="28" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="13"></Label>
+                                <Label Height="28" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="13"></Label>
+                                <Label Height="28" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="13"></Label>
+                                <Label Height="28" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="13"></Label>
+                            </StackPanel>
+                            <ListBox Margin="0,37,0,0" x:Name="CalendarListBox" 
+            					VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch"  Background="#FFF0F0F0"
+            					ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" 
+            					FontSize="15" Grid.Row="1">
+            					<ListBox.ItemsPanel>
+            						<ItemsPanelTemplate>
+            							<UniformGrid x:Name="CalendarDisplayUniformGrid" 
+            								Columns="7" Rows="6"
+            								HorizontalAlignment="Stretch"
+            								IsItemsHost="True" Width="345" Height="255" VerticalAlignment="Stretch"/>
+            						</ItemsPanelTemplate>
+            					</ListBox.ItemsPanel>
+            				</ListBox>
+							<ListBox Margin="0,37,0,0" x:Name="CalendarListBox1" 
+            					VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch"  Background="#FFF0F0F0"
+            					ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" 
+            					FontSize="15" Grid.Row="1">
+            					<ListBox.ItemsPanel>
+            						<ItemsPanelTemplate>
+            							<UniformGrid x:Name="CalendarDisplayUniformGrid" 
+            								Columns="4" Rows="3"
+            								HorizontalAlignment="Stretch"
+            								IsItemsHost="True" Width="345" Height="255" VerticalAlignment="Stretch"/>
+            						</ItemsPanelTemplate>
+            					</ListBox.ItemsPanel>
+            				</ListBox>
+            			</Grid>
+            			<Grid Margin="0">
+                            <Button x:Name="PreviousMonthButton" HorizontalAlignment="Left" Height="20" Margin="15,0,0,8" VerticalAlignment="Bottom" Width="25" BorderThickness="0" Background="{x:Null}" 
+							Template="{DynamicResource ButtonControlTemplate1}" Cursor="Hand">
+                            	           <Button.Resources>
+                                    <ControlTemplate x:Key="ButtonControlTemplate1" TargetType="{x:Type Button}">
+                                        <Grid>
+                                           <Image x:Name="ButtonImage" Source="/DentistManagement;component/Image/previes1.png" Grid.Column="0"/>
+                                        </Grid>
+                                          <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="ButtonImage" Property="Source" Value="/DentistManagement;component/Image/previes2.png"></Setter>
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter TargetName="ButtonImage" Property="Source" Value="/DentistManagement;component/Image/previes2.png"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Button.Resources>          
+							</Button>
+                            <Button x:Name="CurrentMonthButton"  HorizontalAlignment="Left" Height="20" Margin="50,0,0,8" VerticalAlignment="Bottom" Width="25" BorderThickness="0" Background="{x:Null}" 
+							Template="{DynamicResource ButtonControlTemplate1}" Cursor="Hand">
+                            	            <Button.Resources>
+                                    <ControlTemplate x:Key="ButtonControlTemplate1" TargetType="{x:Type Button}">
+                                        <Grid>
+                                           <Image x:Name="ButtonImage" Source="/DentistManagement;component/Image/today1.png" Grid.Column="0"/>
+                                        </Grid>
+                                          <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="ButtonImage" Property="Source" Value="/DentistManagement;component/Image/today2.png"></Setter>
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter TargetName="ButtonImage" Property="Source" Value="/DentistManagement;component/Image/today2.png"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Button.Resources>         
+							</Button>
+                            <Button x:Name="NextMonthButton" HorizontalAlignment="Left" Height="20" Margin="90.5,0,0,8" VerticalAlignment="Bottom" Width="25" BorderThickness="0" Background="{x:Null}" 
+							Template="{DynamicResource ButtonControlTemplate1}" Cursor="Hand">
+                            	 <Button.Resources>
+                                    <ControlTemplate x:Key="ButtonControlTemplate1" TargetType="{x:Type Button}">
+                                        <Grid>
+                                           <Image x:Name="ButtonImage" Source="/DentistManagement;component/Image/next.png"/>
+                                        </Grid>
+                                          <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="ButtonImage" Property="Source" Value="/DentistManagement;component/Image/next2.png"></Setter>
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter TargetName="ButtonImage" Property="Source" Value="/DentistManagement;component/Image/next2.png"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Button.Resources>                     
+							</Button>
+                            <Label x:Name="lbDate"  Height="35" Margin="0,0,102,8" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="120"/>
+                            <Label Content="{Binding DateDetailLeft,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Height="35" Margin="0,0,10,8" VerticalAlignment="Bottom" Width="90"/>
+            			</Grid>
+						 <Path Data="M25,48 L494,48" Fill="#FF49C117"  HorizontalAlignment="Left" Height="1" Margin="0" Grid.Row="1" Stretch="Fill" Stroke="#FF49C117"  VerticalAlignment="Top" StrokeThickness="1"/>
+						  <Path Data="M25,48 L494,48" Fill="#FF49C117"  HorizontalAlignment="Left" Height="1" Margin="0" Grid.Row="2" Stretch="Fill" Stroke="#FF49C117"  VerticalAlignment="Top" StrokeThickness="1"/>
+						  <Path Data="M25,48 L494,48" Fill="#FF49C117"  HorizontalAlignment="Left" Height="1" Margin="0" Grid.Row="3" Stretch="Fill" Stroke="#FF49C117"  VerticalAlignment="Top" StrokeThickness="1"/>
+            			<Grid Margin="0" Grid.Row="2">
+            				<RadioButton Content="预约回收站" HorizontalAlignment="Left" Height="27" FontSize="15"  Margin="20,15,0,0" VerticalAlignment="Top" Width="96"/>
+            				<Button Content="清空" HorizontalAlignment="Right" Height="45" FontSize="15"  Margin="0,5,10,0" VerticalAlignment="Top" Width="80" Style="{DynamicResource ButtonStyle}" d:LayoutOverrides="GridBox"/>
+            			</Grid>       		
+					</Grid>
+            		<Grid x:Name="gdRight" Grid.Column="1" Margin="0">
+            			<Grid.RowDefinitions>
+            				<RowDefinition Height="35"/>
+            				<RowDefinition Height="37"/>
+            				<RowDefinition Height="*"/>
+            			</Grid.RowDefinitions>
+            			<Grid Margin="0">
+            				<Button x:Name="btnDay" Content="天" HorizontalAlignment="Left" Margin="13,5,0,0" Width="54" Height="30" VerticalAlignment="Top" BorderThickness="0" Style="{DynamicResource ButtonStyle}" Click="btnDay_Click" />
+            				<Button x:Name="btnWeek" Content="周" HorizontalAlignment="Left" Margin="72,5,0,0" Width="54" Height="30" VerticalAlignment="Top" BorderThickness="0" Style="{DynamicResource ButtonStyle}" Click="btnWeek_Click" />
+            				<Button x:Name="btnMonth" Content="月" HorizontalAlignment="Left" Margin="133,5,0,0" Width="54" Height="30" VerticalAlignment="Top" BorderThickness="0" Style="{DynamicResource ButtonStyle}" Click="btnMonth_Click" Background="Black" />
+                            <Button Content="排班" Margin="193,5,0,0" Width="54" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="0" Style="{DynamicResource ButtonStyle}" Command="{Binding ShiftsCommand}"/>
+                            <Label x:Name="AA" Content="" Margin="274,8,260,8"/> 
+            			</Grid>
+            			<Grid Margin="0" Grid.Row="1">
+                            <Button x:Name="btnPrevious" HorizontalAlignment="Left" Margin="13,5,0,0" Height="30" VerticalAlignment="Top" BorderThickness="0" Background="{x:Null}" 
+							Template="{DynamicResource ButtonControlTemplate1}" Cursor="Hand" Width="30" Click="btnPrevious_Click">
+                                <Button.Resources>
+                                    <ControlTemplate x:Key="ButtonControlTemplate1" TargetType="{x:Type Button}">
+                                        <Grid>
+                                            <Ellipse x:Name="ButtonEllipse" Width="Auto" Height="Auto" StrokeThickness="1" Fill="White" Stroke="Gray">       
+											</Ellipse>
+                                            <Polygon x:Name="ButtonPolygon" Points="20,200 300,50 300,350" Stroke="White" StrokeThickness="2">
+                                                <Polygon.Fill>
+                                                    <SolidColorBrush Color="Gray" Opacity="0.4"/>
+                                                </Polygon.Fill>
+                                            </Polygon>
+                                            <Image  x:Name="ButtonImage" Source="/DentistManagement;component/Image/left1.png" Grid.Column="0" />
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="ButtonImage" Property="Source" Value="/DentistManagement;component/Image/left2.png"></Setter>
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter TargetName="ButtonImage" Property="Source" Value="/DentistManagement;component/Image/left3.png"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Button.Resources>
+                            </Button>
+                            <Button x:Name="btnCurrent" HorizontalAlignment="Left" Margin="48,5,0,0" Height="30" VerticalAlignment="Top" BorderThickness="0" Background="{x:Null}" 
+							Template="{DynamicResource ButtonControlTemplate1}" Cursor="Hand" Width="30" Click="btnCurrent_Click">
+                                 <Button.Resources>
+                                    <ControlTemplate x:Key="ButtonControlTemplate1" TargetType="{x:Type Button}">
+                                        <Grid>
+                                           <Image x:Name="ButtonImage" Source="/DentistManagement;component/Image/today1.png" Grid.Column="0"/>
+                                        </Grid>
+                                          <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="ButtonImage" Property="Source" Value="/DentistManagement;component/Image/today2.png"></Setter>
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter TargetName="ButtonImage" Property="Source" Value="/DentistManagement;component/Image/today2.png"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Button.Resources>
+                            </Button>
+                            <Button x:Name="btnNext"  HorizontalAlignment="Left" Height="30" Margin="80,5,0,0" VerticalAlignment="Top"  BorderThickness="0" Background="{x:Null}" 
+							Template="{DynamicResource ButtonControlTemplate1}" Cursor="Hand" Width="30" Click="btnNext_Click">
+                                <Button.Resources>
+                                    <ControlTemplate x:Key="ButtonControlTemplate1" TargetType="{x:Type Button}">
+                                        <Grid>
+                                            <Ellipse x:Name="ButtonEllipse" Width="Auto" Height="Auto" StrokeThickness="1" Fill="White" Stroke="Gray">       
+											</Ellipse>
+                                            <Polygon x:Name="ButtonPolygon" Points="20,200 300,50 300,350" Stroke="White" StrokeThickness="2">
+                                                <Polygon.Fill>
+                                                    <SolidColorBrush Color="Gray" Opacity="0.4"/>
+                                                </Polygon.Fill>
+                                            </Polygon>
+                                            <Image x:Name="ButtonImage" Source="/DentistManagement;component/Image/right1.png" Grid.Column="0"/>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="ButtonImage" Property="Source" Value="/DentistManagement;component/Image/right2.png"></Setter>
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter TargetName="ButtonImage" Property="Source" Value="/DentistManagement;component/Image/right3.png"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Button.Resources>
+                            </Button>
+                            <Label x:Name="lbDateRight" Content="{Binding DateRight,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="127,0,0,0" FontSize="21.333"/>
+                        </Grid>
+            			<Grid x:Name="gdMonth" Margin="0" Grid.Row="2" Background="#FFFCFFCA" Visibility="Collapsed">
+            				<Grid.RowDefinitions>
+            					<RowDefinition Height="45"/>
+            					<RowDefinition Height="*"/>
+            				</Grid.RowDefinitions>
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="0.012*"/>
+									<ColumnDefinition Width="0.012*"/>
+									<ColumnDefinition Width="0.012*"/>
+									<ColumnDefinition Width="0.012*"/>
+									<ColumnDefinition Width="0.012*"/>
+									<ColumnDefinition Width="0.012*"/>
+									<ColumnDefinition Width="0.012*"/>
+								</Grid.ColumnDefinitions>
+            				<Label Content="周日" Margin="10,0,0,0" Foreground="Red" FontSize="15" Background="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="#FFD7D7D7" BorderThickness="1"/>
+            				<Label Content="周一" Margin="0" FontSize="15" Background="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="#FFD7D7D7" Grid.Column="1" BorderThickness="1"/>
+            				<Label Content="周二" Margin="0" FontSize="15" Background="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="#FFD7D7D7" Grid.Column="2" BorderThickness="1"/>
+            				<Label Content="周三" Margin="0" FontSize="15" Background="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="#FFD7D7D7" Grid.Column="3" BorderThickness="1"/>
+            				<Label Content="周四" Margin="0" FontSize="15" Background="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="#FFD7D7D7" Grid.Column="4" BorderThickness="1"/>
+            				<Label Content="周五" Margin="0" FontSize="15" Background="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="#FFD7D7D7" Grid.Column="5" BorderThickness="1"/>
+            				<Label Content="周六" Margin="0,0,10,0" Foreground="Red" FontSize="15" Background="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="#FFD7D7D7" Grid.Column="6" BorderThickness="1"/>
+							</Grid>
+							<Grid Grid.Row="1">
+                                <ListBox Margin="10" x:Name="CalendarListBoxByMonth" 
+            					VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch"
+            					ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" 
+            					FontSize="15" Grid.Row="1">
+                                    <ListBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid x:Name="CalendarDisplayUniformGrid" 
+            								Columns="7" Rows="6"
+            								HorizontalAlignment="Stretch"
+            								IsItemsHost="True" Width="Auto"  Height="Auto" VerticalAlignment="Stretch"/>
+                                        </ItemsPanelTemplate>
+                                    </ListBox.ItemsPanel>
+                                </ListBox>
+                            </Grid>
+            			</Grid>
+                        <Grid x:Name="gdDay" Margin="0" Grid.Row="2" Background="#FFFCFFCA">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="45"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+							<Grid x:Name="gd"   Grid.Row="1" Panel.ZIndex="1" Margin="60,10,60,0">
+								
+                                        <canvas:DayCanvasUserControl x:Name="dayCanvas"  Margin="0" VerticalAlignment="Top" MouseMove="dayCanvas_MouseMove" Height="123" Width="{Binding ActualWidth,ElementName=gd}"
+								>
+                                            <i:Interaction.Behaviors>
+                                                <ei:MouseDragElementBehavior ConstrainToParentBounds="True" />
+                                            </i:Interaction.Behaviors>
+                                        </canvas:DayCanvasUserControl>
+								
+								
+                         
+							</Grid>
+							
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="24h" Margin="10,0,0,0" Foreground="#FF1DD620" FontSize="15" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0" Background="#FFFCFFCA"/>
+                                <Label Content="凡祥(中)" Margin="0,0,60,0" FontSize="15" Background="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="#FFD7D7D7" Grid.Column="1" BorderThickness="1"/>
+                            </Grid>
+							<Canvas x:Name="caDayListBox" Grid.Row="1" Background="#FFFCFFCA">
+							<Grid Grid.Row="1" Width="{Binding ActualWidth,ElementName=gdRight}">
+                            
+                                <ListBox Margin="0,10" x:Name="CalendarListBoxByDay" 
+            					VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch"
+            					ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" 
+            					FontSize="15" Grid.Row="1" BorderBrush="White" Foreground="{x:Null}">
+                                    <ListBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid x:Name="CalendarDisplayUniformGrid" 
+            								Columns="1" Rows="14"
+            								HorizontalAlignment="Stretch"
+            								IsItemsHost="True" Width="Auto"  Height="Auto" VerticalAlignment="Stretch"/>
+                                        </ItemsPanelTemplate>
+                                    </ListBox.ItemsPanel>
+                                </ListBox>
+								
+                           
+							</Grid>
+							</Canvas>
+                        </Grid>
+                        <Grid x:Name="gdWeek" Margin="0" Grid.Row="2" Background="#FFFCFFCA" Visibility="Collapsed">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="45"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid Margin="0,0,0,0">
+                                <Grid.ColumnDefinitions>
+                                	<ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="0.151*"/>
+                                    <ColumnDefinition Width="0.151*"/>
+                                    <ColumnDefinition Width="0.151*"/>
+                                    <ColumnDefinition Width="0.151*"/>
+                                    <ColumnDefinition Width="0.151*"/>
+                                    <ColumnDefinition Width="0.151*"/>
+                                    <ColumnDefinition Width="0.151*"/>
+									<ColumnDefinition Width="60"/>
+                                </Grid.ColumnDefinitions>
+								<Label Content="24h" Margin="10,0,0,0" Foreground="#FF1DD620" FontSize="15" Background="#FFFCFFCA" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="#FFD7D7D7" BorderThickness="0"/>
+                                <Label x:Name="lbSunday"  Margin="10,0,0,0" FontSize="15" Background="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="#FFD7D7D7" BorderThickness="1" Grid.Column="1"/>
+                                <Label x:Name="lbMonday"  Margin="0" FontSize="15" Background="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="#FFD7D7D7" Grid.Column="2" BorderThickness="1"/>
+                                <Label x:Name="lbTuesday"  Margin="0" FontSize="15" Background="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="#FFD7D7D7" Grid.Column="3" BorderThickness="1"/>
+                                <Label x:Name="lbWednesday"  Margin="0" FontSize="15" Background="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="#FFD7D7D7" Grid.Column="4" BorderThickness="1"/>
+                                <Label x:Name="lbThursday"  Margin="0" FontSize="15" Background="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="#FFD7D7D7" Grid.Column="5" BorderThickness="1"/>
+                                <Label x:Name="lbFriday" Margin="0" FontSize="15" Background="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="#FFD7D7D7" Grid.Column="6" BorderThickness="1"/>
+                                <Label x:Name="lbSaturday" Margin="0,0,10,0" FontSize="15" Background="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="#FFD7D7D7" Grid.Column="7" BorderThickness="1"/>
+                            </Grid>
+							<Grid Grid.Row="1" Panel.ZIndex="1" Margin="70,10,70,0" >
+								
+						      <canvas:WeekCanvasUserControl x:Name="dayCanvasWeek" MouseMove="dayCanvasWeek_MouseMove" Width="{Binding ActualWidth,ElementName=lbSunday}"
+								   Height="123" >
+                                            <i:Interaction.Behaviors>
+                                                <ei:MouseDragElementBehavior ConstrainToParentBounds="True" />
+                                            </i:Interaction.Behaviors>
+                                           
+                                        </canvas:WeekCanvasUserControl>
+			
+							</Grid>
+							<Canvas x:Name="caWeekListBox" Grid.Row="1" Background="#FFFCFFCA">
+                            <Grid Grid.Row="1" Background="#FFFCFFCA" Width="{Binding ActualWidth,ElementName=gdRight}">
+                                <ListBox Margin="0,10" x:Name="CalendarListBoxByWeek" 
+            					VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch"
+            					ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" 
+            					FontSize="15" Grid.Row="1" BorderThickness="0">
+                                    <ListBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid x:Name="CalendarDisplayUniformGrid" 
+            								Columns="1" Rows="14"
+            								HorizontalAlignment="Stretch"
+            								IsItemsHost="True" Width="Auto"  Height="Auto" VerticalAlignment="Stretch"/>
+                                        </ItemsPanelTemplate>
+                                    </ListBox.ItemsPanel>
+                                </ListBox>
+                            </Grid>
+							</Canvas>
+                        </Grid>
+                    </Grid>
+			    </Grid>
+            </TabItem>
+        </TabControl>
+        <my:DazzleButton Height="5" HorizontalAlignment="Right"   Margin="0,20,50,0" x:Name="dazzleButtonMin" VerticalAlignment="Top" Width="27" d:LayoutOverrides="GridBox" Command="{Binding MinCommand}">
+            <my:DazzleButton.Background>
+                <ImageBrush ImageSource="/DentistManagement;component/Image/Min1.png" />
+            </my:DazzleButton.Background>
+            <my:DazzleButton.MyMoverBrush>
+                <ImageBrush ImageSource="/DentistManagement;component/Image/Min2.png" />
+            </my:DazzleButton.MyMoverBrush>
+            <my:DazzleButton.MyEnterBrush>
+                <ImageBrush ImageSource="/DentistManagement;component/Image/Min2.png" />
+            </my:DazzleButton.MyEnterBrush>
+        </my:DazzleButton>
+        <my:DazzleButton Height="22" HorizontalAlignment="Right" Margin="0,10,15,0" x:Name="dazzleButtonClose" Width="27" VerticalAlignment="Top" d:LayoutOverrides="GridBox" Command="{Binding CloseCommand}">
+            <my:DazzleButton.Background>
+                <ImageBrush ImageSource="/DentistManagement;component/Image/Close1.png" />
+            </my:DazzleButton.Background>
+            <my:DazzleButton.MyMoverBrush>
+                <ImageBrush ImageSource="/DentistManagement;component/Image/Close2.png" />
+            </my:DazzleButton.MyMoverBrush>
+            <my:DazzleButton.MyEnterBrush>
+                <ImageBrush ImageSource="/DentistManagement;component/Image/Close2.png" />
+            </my:DazzleButton.MyEnterBrush>
+        </my:DazzleButton>
+    </Grid>
+</Window>

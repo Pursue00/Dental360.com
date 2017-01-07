@@ -1,0 +1,501 @@
+﻿<Window x:Class="DentistManagement.View.WorkforceManagement"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:my="clr-namespace:WPF.DazzleUI2.Controls;assembly=WPF.DazzleUI2" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DentistManagement.Model.ServiceClass"
+        xmlns:convert="clr-namespace:DentistManagement.Model.Converter"
+        xmlns:view="clr-namespace:DentistManagement.View"
+		mc:Ignorable="d"
+        Title="排班管理" Height="768" Width="1024"
+        Icon="/DentistManagement;component/Image/dentist.ico"
+        WindowStartupLocation="CenterScreen"  WindowState="Maximized"  WindowStyle="None" ResizeMode="NoResize" Topmost="False" AllowsTransparency="True"  BorderThickness="1" Loaded="Window_Loaded">
+    <Window.Resources>
+        <local:WorkTime x:Key="WorkTimeList"></local:WorkTime>
+        <convert:ColorConverter x:Key="WeekColorConvert"/>
+        <convert:BackgroundColorConverter x:Key="BackgroundColorConverter"/>
+        <convert:ColorConvertWorkforceManagement  x:Key="ColorConvertWorkforceManagement"/>
+    </Window.Resources>
+    <Grid x:Name="mainGrid" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+			<RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <Grid Margin="0" Grid.Row="3">
+            <Button Content="班次设置" HorizontalAlignment="Left" Margin="49,5,0,0" Width="140" VerticalAlignment="Top" Height="50" Style="{DynamicResource ButtonStyle}" Command="{Binding WorkTimeSettingCommand}"/>
+        	<Button Content="导出Excel" HorizontalAlignment="Left" Margin="500,5,0,0" Width="140" Height="50" VerticalAlignment="Top" Style="{DynamicResource ButtonStyle}" BorderThickness="1" Visibility="Hidden"/>
+            <Button Content="退出" Margin="700,5,0,0" Width="140" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top" Command="{Binding CloseCommand}" Style="{DynamicResource ButtonStyle1}"/>
+        </Grid>
+        <Grid Margin="0" Grid.Row="1">
+        	<Grid.ColumnDefinitions>
+        		<ColumnDefinition Width="300"/>
+        		<ColumnDefinition Width="*"/>
+        	</Grid.ColumnDefinitions>
+        	<Label Content="排班月份" HorizontalAlignment="Left" Margin="25,12,0,0" Width="70" Height="35" VerticalAlignment="Top" FontSize="15"/>
+            <ComboBox x:Name="cbMonth" Margin="95,12,74,0" Style="{DynamicResource CboCommomStyle}" Height="35" VerticalAlignment="Top" SelectedItem="{Binding WorkforceDate, Mode=TwoWay}" ItemsSource="{Binding cbDateList,Source={StaticResource WorkTimeList}}">
+            
+            </ComboBox>
+        	<Label Content="值班班次" HorizontalAlignment="Right" Margin="0,12,4,0" Width="70" Height="35" VerticalAlignment="Top" FontSize="15"/>
+        	
+        	<Grid Grid.Column="1" Margin="0">
+                <view:ButtonListUC x:Name="ButtonListUC" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>   	
+			</Grid>
+        </Grid>
+        <Grid x:Name="gdWorkManagement" Margin="0" Grid.Row="2" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+            <DataGrid x:Name="dgWorkManagement"  Margin="0" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Auto" CellStyle="{StaticResource CellStyle}" 
+                    					CanUserAddRows="False" AreRowDetailsFrozen="True"  Background="#FFE6E6DE" ItemsSource="{Binding WorkforceManagementList}" 
+            
+                    					RowHeaderWidth="0"  BorderThickness="1,2" FontSize="15" SelectionMode="Single" Grid.ColumnSpan="2" d:LayoutOverrides="GridBox" Grid.Column="1" Grid.Row="1" FrozenColumnCount="1" >
+               
+                <DataGrid.ColumnHeaderStyle>
+                    <Style  TargetType="{x:Type DataGridColumnHeader}">
+                        <Style.Setters>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                            <Setter Property="Foreground" Value="{Binding CellColor,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                        </Style.Setters>
+                    </Style>
+                    <!--<Style TargetType="DataGridColumnHeader">
+                        
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="DataGridColumnHeader">
+                                   
+                                    <Grid>
+                                        <ContentPresenter x:Name="ss" Visibility="Collapsed"/>
+                                        <TextBlock  Text="{Binding CellColor,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Foreground="{Binding CellColor,Converter={StaticResource ColorConvertWorkforceManagement}}"/>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>-->
+                </DataGrid.ColumnHeaderStyle>
+               
+                <DataGrid.VerticalGridLinesBrush>
+                    						<LinearGradientBrush>
+                    							<GradientStop Color="#FF282828"/>
+                    						</LinearGradientBrush>
+                    					</DataGrid.VerticalGridLinesBrush>
+                    					<DataGrid.HorizontalGridLinesBrush>
+                    						<LinearGradientBrush>
+                    							<GradientStop Color="#FF3A3A3A"/>
+                    						</LinearGradientBrush>
+                    					</DataGrid.HorizontalGridLinesBrush>
+                    					<DataGrid.Columns>
+                   
+                    <DataGridTextColumn  Binding="{Binding Name}"  Header="" Width="80" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="True"/>
+                    <!--<DataGridTemplateColumn Header="1" MinWidth="70" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Date1,UpdateSourceTrigger=PropertyChanged}" Foreground="{Binding CellColor,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource ColorConvertWorkforceManagement}}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>-->
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="1" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Date1}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{Binding Date1,Converter={StaticResource WeekColorConvert}}" Background="{Binding Date1,Converter={StaticResource BackgroundColorConverter}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="2" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                 <Label Content="{Binding Date2}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{Binding Date2,Converter={StaticResource WeekColorConvert}}" Background="{Binding Date2,Converter={StaticResource BackgroundColorConverter}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="3" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Date3}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{Binding Date3,Converter={StaticResource WeekColorConvert}}" Background="{Binding Date3,Converter={StaticResource BackgroundColorConverter}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="4" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Date4}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{Binding Date4,Converter={StaticResource WeekColorConvert}}" Background="{Binding Date4,Converter={StaticResource BackgroundColorConverter}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="5" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Date5}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{Binding Date5,Converter={StaticResource WeekColorConvert}}" Background="{Binding Date5,Converter={StaticResource BackgroundColorConverter}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="6" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Date6}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{Binding Date6,Converter={StaticResource WeekColorConvert}}" Background="{Binding Date6,Converter={StaticResource BackgroundColorConverter}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="7" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                               <Label Content="{Binding Date7}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{Binding Date7,Converter={StaticResource WeekColorConvert}}" Background="{Binding Date7,Converter={StaticResource BackgroundColorConverter}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="8" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Date8}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{Binding Date8,Converter={StaticResource WeekColorConvert}}" Background="{Binding Date8,Converter={StaticResource BackgroundColorConverter}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="9"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                 <Label Content="{Binding Date9}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{Binding Date9,Converter={StaticResource WeekColorConvert}}" Background="{Binding Date9,Converter={StaticResource BackgroundColorConverter}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="10" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                 <Label Content="{Binding Date10}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{Binding Date10,Converter={StaticResource WeekColorConvert}}" Background="{Binding Date10,Converter={StaticResource BackgroundColorConverter}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="11" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                 <Label Content="{Binding Date11}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{Binding Date11,Converter={StaticResource WeekColorConvert}}" Background="{Binding Date11,Converter={StaticResource BackgroundColorConverter}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="12" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Date12}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{Binding Date12,Converter={StaticResource WeekColorConvert}}" Background="{Binding Date12,Converter={StaticResource BackgroundColorConverter}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="13" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Date13}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{Binding Date13,Converter={StaticResource WeekColorConvert}}" Background="{Binding Date13,Converter={StaticResource BackgroundColorConverter}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="14" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Date14}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{Binding Date14,Converter={StaticResource WeekColorConvert}}" Background="{Binding Date14,Converter={StaticResource BackgroundColorConverter}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="15" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                               <Label Content="{Binding Date15}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{Binding Date15,Converter={StaticResource WeekColorConvert}}" Background="{Binding Date15,Converter={StaticResource BackgroundColorConverter}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="16" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                 <Label Content="{Binding Date16}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{Binding Date16,Converter={StaticResource WeekColorConvert}}" Background="{Binding Date16,Converter={StaticResource BackgroundColorConverter}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="17" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                 <Label Content="{Binding Date17}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{Binding Date17,Converter={StaticResource WeekColorConvert}}" Background="{Binding Date17,Converter={StaticResource BackgroundColorConverter}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="18" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Date18}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{Binding Date18,Converter={StaticResource WeekColorConvert}}" Background="{Binding Date18,Converter={StaticResource BackgroundColorConverter}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="19" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Date19}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{Binding Date19,Converter={StaticResource WeekColorConvert}}" Background="{Binding Date19,Converter={StaticResource BackgroundColorConverter}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="20" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Date20}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{Binding Date20,Converter={StaticResource WeekColorConvert}}" Background="{Binding Date20,Converter={StaticResource BackgroundColorConverter}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="21" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                 <Label Content="{Binding Date21}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{Binding Date21,Converter={StaticResource WeekColorConvert}}" Background="{Binding Date21,Converter={StaticResource BackgroundColorConverter}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="22" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Date22}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{Binding Date22,Converter={StaticResource WeekColorConvert}}" Background="{Binding Date22,Converter={StaticResource BackgroundColorConverter}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="23" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                 <Label Content="{Binding Date23}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{Binding Date23,Converter={StaticResource WeekColorConvert}}" Background="{Binding Date23,Converter={StaticResource BackgroundColorConverter}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="24" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Date24}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{Binding Date24,Converter={StaticResource WeekColorConvert}}" Background="{Binding Date24,Converter={StaticResource BackgroundColorConverter}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn >
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="25" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Date25}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{Binding Date25,Converter={StaticResource WeekColorConvert}}" Background="{Binding Date25,Converter={StaticResource BackgroundColorConverter}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="26" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Date26}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{Binding Date31,Converter={StaticResource WeekColorConvert}}" Background="{Binding Date26,Converter={StaticResource BackgroundColorConverter}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn >
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="27" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                               <Label Content="{Binding Date27}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{Binding Date31,Converter={StaticResource WeekColorConvert}}" Background="{Binding Date27,Converter={StaticResource BackgroundColorConverter}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="28" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                 <Label Content="{Binding Date28}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{Binding Date31,Converter={StaticResource WeekColorConvert}}" Background="{Binding Date28,Converter={StaticResource BackgroundColorConverter}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="header29">
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="29" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Date29}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{Binding Date29,Converter={StaticResource WeekColorConvert}}" Background="{Binding Date29,Converter={StaticResource BackgroundColorConverter}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="header30">
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="30" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Date30}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{Binding Date30,Converter={StaticResource WeekColorConvert}}" Background="{Binding Date30,Converter={StaticResource BackgroundColorConverter}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="header31">
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="31" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Date31}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{Binding Date31,Converter={StaticResource WeekColorConvert}}" Background="{Binding Date31,Converter={StaticResource BackgroundColorConverter}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn x:Name="headerRest"  Binding="{Binding Rest}"  Visibility="Hidden"  Header="休息" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="True"/>
+                    <DataGridTextColumn x:Name="headerAllwork"  Binding="{Binding Allwork}" Visibility="Hidden" Header="全勤" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="True"/>
+                    <DataGridTextColumn x:Name="headerLeave"  Binding="{Binding Leave}"  Visibility="Hidden" Header="请假" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="True"/>
+                    <DataGridTextColumn x:Name="headerEarly"  Binding="{Binding Early}" Visibility="Hidden" Header="早退" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="True"/>
+                    <DataGridTextColumn x:Name="headerLate"  Binding="{Binding Late}" Visibility="Hidden" Header="迟到" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="True"/>
+                    <DataGridTextColumn x:Name="headerAbsence"  Binding="{Binding Absence}" Visibility="Hidden"  Header="缺勤" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="True"/>
+                    <DataGridTextColumn x:Name="headerEarlyWork"  Binding="{Binding EarlyWork}" Visibility="Hidden" Header="早班" IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="True"/>
+                    <DataGridTextColumn x:Name="headerMinddleWork"  Binding="{Binding MinddleWork}" Visibility="Hidden" Header="中班"  IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="True"/>
+                    <DataGridTextColumn x:Name="headerLateWork"  Binding="{Binding LateWork}" Visibility="Hidden" Header="晚班"  IsReadOnly="True" CanUserReorder="False" CanUserResize="False" CanUserSort="True"/>
+                    					</DataGrid.Columns>
+                    				</DataGrid>		
+        </Grid>
+        <Grid Margin="0" Background="#FF5BBA44">
+        	<Label Margin="0" x:Name="labUser" d:LayoutOverrides="GridBox" FontSize="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="排班管理" Foreground="White"/>
+        	<my:DazzleButton Height="22" HorizontalAlignment="Right" Margin="0,5,5,0" x:Name="dazzleButtonClose" Width="50
+			" VerticalAlignment="Top"  Command="{Binding CloseCommand}">
+            <my:DazzleButton.Background>
+                <ImageBrush ImageSource="/DentistManagement;component/Image/close.png" />
+            </my:DazzleButton.Background>
+            <my:DazzleButton.MyMoverBrush>
+                    <ImageBrush ImageSource="/DentistManagement;component/Image/CloseMouseOver.png" />
+            </my:DazzleButton.MyMoverBrush>
+            <my:DazzleButton.MyEnterBrush>
+                    <ImageBrush ImageSource="/DentistManagement;component/Image/CloseMouseOver.png" />
+            </my:DazzleButton.MyEnterBrush>
+			</my:DazzleButton>
+        </Grid>
+    </Grid>
+</Window>

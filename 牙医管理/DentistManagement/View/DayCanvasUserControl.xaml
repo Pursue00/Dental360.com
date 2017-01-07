@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="DentistManagement.View.DayCanvasUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" Height="Auto">
+    <Grid>
+        <Border x:Name="bd" BorderThickness="1" Background="#FFFCFFCA" BorderBrush="#FFD7D7D7">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Margin="0" Background="#FFFC7F26">
+                    <Image Height="33" Margin="0" VerticalAlignment="Top" Source="/DentistManagement;component/Image/yuyue.png"/>
+                </Grid>
+                <Grid Grid.Column="1" Margin="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="病人一" Margin="0"/>
+                    <Label Content="139201112121" Margin="0" Grid.Row="1"/>
+                    <Label Content="补牙" Margin="0" Grid.Row="2"/>
+                  <Label x:Name="lbTimeLeft"  Margin="0" Grid.Row="3" Width="60" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+					 <Label x:Name="lbTimeRight"  Margin="60,0,0,0" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Top" Width="60" Height="40"/>
+					 <Label x:Name="lbTimeHour"  Margin="120,0,0,0" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Height="40"/>
+                </Grid>
+            </Grid>
+        </Border>
+        <Thumb Opacity="0.01" DragDelta="ReSize_DragDelta" Width="{Binding ActualWidth,ElementName=bd}" Cursor="SizeNWSE" Height="10" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0"/>
+
+        <Thumb Opacity="0.01" DragDelta="ReSize_DragDelta" Cursor="SizeNESW" Height="10"  Width="{Binding ActualWidth,ElementName=bd}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0"/>
+
+    </Grid>
+</UserControl>

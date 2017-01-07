@@ -1,0 +1,40 @@
+﻿<Window x:Class="DentistManagement.View.DeleteRowReminder"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:my="clr-namespace:WPF.DazzleUI2.Controls;assembly=WPF.DazzleUI2"
+        Title="确定" Height="250" Width="450" WindowStartupLocation="CenterScreen"   WindowStyle="None" ResizeMode="NoResize" Topmost="False" AllowsTransparency="False"  BorderThickness="1">
+    <Grid>
+    	<Grid.RowDefinitions>
+    		<RowDefinition Height="40"/>
+    		<RowDefinition Height="*"/>
+    		<RowDefinition Height="60"/>
+    	</Grid.RowDefinitions>
+        <Grid Margin="0" Background="#FF5BBA44">
+    		<Label Content="确认" Margin="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="21.333" Foreground="White"/>
+			<my:DazzleButton Height="22" HorizontalAlignment="Right" Margin="0,5,5,0" x:Name="dazzleButtonClose" Width="50
+			" VerticalAlignment="Top"  Command="{Binding CloseCommand}">
+            <my:DazzleButton.Background>
+                <ImageBrush ImageSource="/DentistManagement;component/Image/close.png" />
+            </my:DazzleButton.Background>
+            <my:DazzleButton.MyMoverBrush>
+                    <ImageBrush ImageSource="/DentistManagement;component/Image/CloseMouseOver.png" />
+            </my:DazzleButton.MyMoverBrush>
+            <my:DazzleButton.MyEnterBrush>
+                    <ImageBrush ImageSource="/DentistManagement;component/Image/CloseMouseOver.png" />
+            </my:DazzleButton.MyEnterBrush>
+        </my:DazzleButton>
+    	</Grid>
+        <Grid Margin="0" Grid.Row="1">
+        	<Grid.ColumnDefinitions>
+        		<ColumnDefinition Width="0.335*"/>
+        		<ColumnDefinition Width="0.665*"/>
+        	</Grid.ColumnDefinitions>
+            <Image Margin="0,20,0,0" Source="/DentistManagement;component/Image/tishi.png" Width="100" Height="100" VerticalAlignment="Top"/>
+        	<Label Content="确定删除当前行吗？" Grid.Column="1" Margin="0,50,0,0" VerticalContentAlignment="Center" FontSize="21.333" VerticalAlignment="Top"/>
+        </Grid>
+        <Grid Margin="0" Grid.Row="2">
+            <Button Content="确定" HorizontalAlignment="Left" Margin="120,8,0,0" Width="90" FontSize="15" Style="{DynamicResource ButtonStyle}" Height="45" VerticalAlignment="Top" Command="{Binding SaveCommand}" />
+            <Button Content="取消" HorizontalAlignment="Left" Margin="250,8,0,0" Width="90" FontSize="15" Style="{DynamicResource ButtonStyle1}" Height="45" VerticalAlignment="Top" Command="{Binding CloseCommand}"/>
+        </Grid>
+    </Grid>
+</Window>

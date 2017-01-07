@@ -1,0 +1,17 @@
+﻿<Application x:Class="DentistManagement.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/BrushDictionary.xaml"/>
+                <ResourceDictionary Source="Styles/TabControlStyleDictionary.xaml"/>
+                <ResourceDictionary Source="Styles/ButtonStyleDictionary.xaml"/>
+                <ResourceDictionary Source="Styles/ComboBoxStyleDictionary.xaml"/>
+                <ResourceDictionary Source="Styles/DataGridStyleDictionary.xaml"/>
+                <ResourceDictionary Source="Themes/Generic.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

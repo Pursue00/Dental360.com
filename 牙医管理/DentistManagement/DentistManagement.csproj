@@ -1,0 +1,297 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F45B61B9-4AFE-4115-B506-6881B9CED579}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DentistManagement</RootNamespace>
+    <AssemblyName>DentistManagement</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>dentist.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="GalaSoft.MvvmLight.Extras.WPF4, Version=3.0.0.32852, Culture=neutral, PublicKeyToken=1673db7d5906b0ad, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\GalaSoft.MvvmLight.Extras.WPF4.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\编程\Practice\更改\MyOrder20150415\MyOrder20150414\MyOrder\bin\Debug\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework.Aero" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\编程\Practice\更改\MyOrder20150415\MyOrder20150414\MyOrder\bin\Debug\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WPF.DazzleUI2, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\WPF.DazzleUI2.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Model\Converter\BackgroundColorConverter.cs" />
+    <Compile Include="Model\GraphList.cs" />
+    <Compile Include="Model\Helper\ButtonNames.cs" />
+    <Compile Include="Model\Helper\RelayCommand.cs" />
+    <Compile Include="Model\ChineseLunarCalendar.cs" />
+    <Compile Include="Model\Converter\ColorConvert.cs" />
+    <Compile Include="Model\Converter\ColorConverter.cs" />
+    <Compile Include="Model\Converter\ColorConvertShiftsSetting.cs" />
+    <Compile Include="Model\Converter\ColorConvertWorkforceManagement.cs" />
+    <Compile Include="Model\DateEntry.cs" />
+    <Compile Include="Model\DelegateCommand.cs" />
+    <Compile Include="Model\ICalendar.cs" />
+    <Compile Include="Model\LogHelper.cs" />
+    <Compile Include="Model\MyPoint.cs" />
+    <Compile Include="Model\ServiceClass\ShiftsInformation.cs" />
+    <Compile Include="Model\ServiceClass\ShiftsInforService.cs" />
+    <Compile Include="Model\ServiceClass\WorkforceManagements.cs" />
+    <Compile Include="Model\ServiceClass\WorkTime.cs" />
+    <Compile Include="Model\StandardGregorianCalendar.cs" />
+    <Compile Include="Model\WindowBehaviorHelper.cs" />
+    <Compile Include="Properties\Resources.zh-CN.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.zh-CN.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\ButtonListVM.cs" />
+    <Compile Include="ViewModel\DeleteRowReminderViewModel.cs" />
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\ShiftsSettingViewModel.cs" />
+    <Compile Include="ViewModel\WorkforceManagementViewModel.cs" />
+    <Compile Include="View\ButtonListUC.xaml.cs">
+      <DependentUpon>ButtonListUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DayCanvasUserControl.xaml.cs">
+      <DependentUpon>DayCanvasUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DayUserControl.xaml.cs">
+      <DependentUpon>DayUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DeleteRowReminder.xaml.cs">
+      <DependentUpon>DeleteRowReminder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MonthUserControl.xaml.cs">
+      <DependentUpon>MonthUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ShiftsSetting.xaml.cs">
+      <DependentUpon>ShiftsSetting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WeekCanvasUserControl.xaml.cs">
+      <DependentUpon>WeekCanvasUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WeekUserControl.xaml.cs">
+      <DependentUpon>WeekUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WorkforceManagement.xaml.cs">
+      <DependentUpon>WorkforceManagement.xaml</DependentUpon>
+    </Compile>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Styles\BrushDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\ButtonStyleDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\DataGridStyleDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\TabControlStyleDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\ComboBoxStyleDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ButtonListUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DayCanvasUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DayUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DeleteRowReminder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MonthUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ShiftsSetting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WeekCanvasUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WeekUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WorkforceManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.zh-CN.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.zh-CN.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\dentist.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\dentist.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="dentist.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Close1.png" />
+    <Resource Include="Image\Close2.png" />
+    <Resource Include="Image\Min1.png" />
+    <Resource Include="Image\Min2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\delete.png" />
+    <Resource Include="Image\reminder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\left1.png" />
+    <Resource Include="Image\left2.png" />
+    <Resource Include="Image\left3.png" />
+    <Resource Include="Image\right3.png" />
+    <Resource Include="Image\right1.png" />
+    <Resource Include="Image\right2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\CloseMouseOver.png" />
+    <Resource Include="Image\next1.png" />
+    <Resource Include="Image\next2.png" />
+    <Resource Include="Image\previes1.png" />
+    <Resource Include="Image\previes2.png" />
+    <Resource Include="Image\tishi.png" />
+    <Resource Include="Image\today1.png" />
+    <Resource Include="Image\today2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\next.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\yuyue.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
